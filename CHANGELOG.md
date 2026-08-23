@@ -5,7 +5,9 @@ Versioning while remaining pre-1.0.
 
 ## Unreleased
 
-No changes yet.
+- Add a typed, bounded source-scoped LXMF direct-message method for
+  MeshMonitor 4.15.1's supported Reticulum message endpoint, including
+  delivery method and reply-hash validation with no automatic retries.
 
 ## 0.8.0 - 2026-08-22
 
@@ -15,8 +17,8 @@ No changes yet.
   exact outbound-body preservation, and local node-delete results.
 - Add typed GET-only Reticulum status, public identity, interface,
   destination, LXMF conversation/message, and stored-path contracts plus a
-  serialized best-effort snapshot. Radio configuration, probing, sending, and
-  private identity material remain excluded.
+  serialized best-effort snapshot. Radio configuration, probing, and private
+  identity material remain excluded.
 - Add typed read-only exact-server health and cached update-check methods for
   version, uptime, database type, available release, and explicit check errors.
   These methods expose no update or restart action.

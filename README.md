@@ -44,6 +44,8 @@ API.
 - One unsplit Meshtastic channel or direct message (maximum 200 UTF-8 bytes)
 - One MeshCore channel message (maximum 130 bytes) or direct message (maximum
   150 bytes)
+- One LXMF direct message through a selected Reticulum source (maximum 4,096
+  UTF-8 bytes), with an optional title, delivery method, and reply hash
 - One MeshCore flood advert for an explicitly selected source
 - Meshtastic traceroute, position, NodeInfo, and NeighborInfo requests through
   MeshMonitor's authenticated v1 action routes
@@ -55,8 +57,9 @@ MeshCore contacts are supported through MeshMonitor's protocol-specific
 `/api/sources/{id}/meshcore` read routes because MeshMonitor does not normalize
 them through the canonical v1 node endpoint. Reticulum data uses the corresponding
 `/api/sources/{id}/reticulum` routes and deliberately excludes radio
-configuration, path probes, remote status queries, identity writes, and LXMF
-sending. Stored Meshtastic history uses the
+configuration, path probes, remote status queries, identity writes, propagation
+changes, and automatic announces. Its supported write surface is limited to the
+public, source-scoped LXMF message endpoint. Stored Meshtastic history uses the
 canonical per-source v1 message route; stored MeshCore history uses its verified
 source-scoped route. The compatibility unified method remains available for
 session-capable deployments, but MeshMonitor 4.14.1 does not bind Bearer tokens

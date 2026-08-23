@@ -1,8 +1,9 @@
-# Reticulum read contract
+# Reticulum contract
 
-MeshMonitor 4.15.1 exposes read-only Reticulum data below
+MeshMonitor 4.15.1 exposes Reticulum data below
 `/api/sources/{source_id}/reticulum`. The client supports `status`, `identity`,
 `interfaces`, `destinations`, `messages`, per-peer message history, and `paths`.
+It also supports one deliberate LXMF write through `POST /messages`.
 
 All observed routes return `{ "success": true, "data": ... }`. Unknown fields
 remain available through each model's `raw` mapping. Hashes are public routing
@@ -22,8 +23,14 @@ Important semantics:
   contract returned null and clients must not invent radio metrics.
 - Reading `paths` does not perform a path probe. Probe and remote-status routes
   remain deliberately unsupported because they can generate network traffic.
-- Radio configuration, sending, favorites, and identity import/export are out
-  of scope for this read-only contract.
+- `send_reticulum_message` accepts one 32-character destination hash and up to
+  4,096 UTF-8 bytes. It may include a title, one of MeshMonitor's supported
+  delivery methods, and a hexadecimal reply hash. It never retries.
+- The send route needs source-scoped `messages:write` and a connected Reticulum
+  bridge. MeshMonitor's returned row records the initial LXMF delivery state;
+  later state changes arrive through normal message polling.
+- Radio configuration, favorites, propagation changes, path probes, remote
+  status, automatic announces, and identity import/export remain out of scope.
 
 The deterministic fixture at `tests/fixtures/reticulum_contract.json` is
 synthetic and contains no live identities, addresses, coordinates, or message
