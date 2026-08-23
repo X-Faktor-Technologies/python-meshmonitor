@@ -1,0 +1,150 @@
+{
+  "status": {
+    "success": true,
+    "data": {
+      "connected": true,
+      "mode": "attach",
+      "interfaceCount": 2,
+      "destinationCount": 1,
+      "rnsVersion": "1.4.2",
+      "bridgeVersion": "0.1.0"
+    }
+  },
+  "identity": {
+    "success": true,
+    "data": {
+      "destinationHash": "11111111111111111111111111111111",
+      "displayName": null
+    }
+  },
+  "interfaces": {
+    "success": true,
+    "data": [
+      {
+        "id": 1,
+        "interfaceName": "Synthetic TCP Listener",
+        "interfaceType": "TCPServerInterface",
+        "interfaceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mode": "full",
+        "status": "up",
+        "online": true,
+        "bitrate": 10000000,
+        "txBytes": 512,
+        "rxBytes": 256,
+        "lastSeenAt": 1770000000000,
+        "frequency": null,
+        "bandwidth": null,
+        "spreadingFactor": null,
+        "codingRate": null,
+        "txPower": null,
+        "futureInterfaceField": "retained"
+      },
+      {
+        "id": 2,
+        "interfaceName": "Synthetic RNode",
+        "interfaceType": "RNodeInterface",
+        "interfaceHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "mode": "full",
+        "status": "up",
+        "online": true,
+        "bitrate": 3125,
+        "txBytes": 128,
+        "rxBytes": 64,
+        "lastSeenAt": 1770000000000,
+        "frequency": null,
+        "bandwidth": null,
+        "spreadingFactor": null,
+        "codingRate": null,
+        "txPower": null
+      }
+    ]
+  },
+  "destinations": {
+    "success": true,
+    "data": [
+      {
+        "destinationHash": "22222222222222222222222222222222",
+        "identityHash": "33333333333333333333333333333333",
+        "appName": "lxmf",
+        "aspects": "delivery",
+        "displayName": "Synthetic Peer",
+        "hops": 1,
+        "nextHopInterface": "TCPInterface[Synthetic]",
+        "rssi": null,
+        "snr": null,
+        "quality": null,
+        "announceCount": 2,
+        "firstSeen": 1770000000000,
+        "lastSeen": 1770000060000,
+        "lastAnnounceAt": 1770000060000,
+        "isFavorite": false,
+        "latitude": null,
+        "longitude": null,
+        "altitude": null
+      }
+    ]
+  },
+  "conversations": {
+    "success": true,
+    "data": [
+      {
+        "peerHash": "22222222222222222222222222222222",
+        "lastMessage": {
+          "id": "synthetic-source_synthetic-message",
+          "sourceId": "synthetic-source",
+          "fromHash": "22222222222222222222222222222222",
+          "toHash": "11111111111111111111111111111111",
+          "title": null,
+          "content": "Synthetic fixture message",
+          "timestamp": 1770000120000,
+          "receivedAt": 1770000120001,
+          "state": "delivered",
+          "method": "opportunistic",
+          "signatureValidated": true,
+          "ratcheted": true,
+          "replyToHash": null,
+          "threadHash": null,
+          "rssi": null,
+          "snr": null,
+          "quality": null,
+          "futureMessageField": "retained"
+        },
+        "messageCount": 1
+      }
+    ]
+  },
+  "messages": {
+    "success": true,
+    "data": [
+      {
+        "id": "synthetic-source_synthetic-message",
+        "sourceId": "synthetic-source",
+        "fromHash": "22222222222222222222222222222222",
+        "toHash": "11111111111111111111111111111111",
+        "content": "Synthetic fixture message",
+        "timestamp": 1770000120000,
+        "receivedAt": 1770000120001,
+        "state": "delivered",
+        "method": "opportunistic",
+        "signatureValidated": true,
+        "ratcheted": true,
+        "rssi": null,
+        "snr": null,
+        "quality": null
+      }
+    ]
+  },
+  "paths": {
+    "success": true,
+    "data": [
+      {
+        "destinationHash": "22222222222222222222222222222222",
+        "viaHash": "44444444444444444444444444444444",
+        "hops": 1,
+        "interfaceName": "TCPInterface[Synthetic]",
+        "expiresAt": 1770600000000,
+        "updatedAt": 1770000120000
+      }
+    ]
+  }
+}

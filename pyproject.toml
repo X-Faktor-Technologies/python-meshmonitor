@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "meshmonitor-api-client"
+version = "0.8.0"
+description = "Typed asynchronous client for the MeshMonitor API"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [{ name = "Elier" }]
+keywords = ["meshmonitor", "meshtastic", "meshcore", "home-assistant"]
+dependencies = ["aiohttp>=3.11,<4"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Documentation = "https://github.com/X-Faktor-Technologies/python-meshmonitor#readme"
+Issues = "https://github.com/X-Faktor-Technologies/python-meshmonitor/issues"
+Source = "https://github.com/X-Faktor-Technologies/python-meshmonitor"
+
+[project.optional-dependencies]
+test = [
+  "mypy>=1.14",
+  "pytest>=8.3",
+  "pytest-asyncio>=0.25",
+  "ruff>=0.9",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/meshmonitor_client"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["meshmonitor_client"]
