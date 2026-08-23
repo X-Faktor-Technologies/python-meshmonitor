@@ -104,6 +104,57 @@ async def test_reticulum_messages_adapt_to_unified_contract() -> None:
 
 
 @pytest.mark.asyncio
+async def test_reticulum_message_send_is_source_scoped_bounded_and_typed() -> None:
+    path = "/api/sources/synthetic-source/reticulum/messages"
+    sent = dict(_contract()["messages"]["data"][0])
+    sent.update({"state": "sending", "content": "Hello over LXMF"})
+    session = FakeSession({path: (200, {"success": True, "data": sent})})
+    client = MeshMonitorClient("http://mesh.test", "secret", session=session)  # type: ignore[arg-type]
+
+    result = await client.send_reticulum_message(
+        "synthetic-source",
+        "Hello over LXMF",
+        to_destination_hash="2" * 32,
+        method="direct",
+        reply_to_hash="a1b2",
+    )
+
+    assert result.content == "Hello over LXMF"
+    assert result.state == "sending"
+    assert session.posts == [
+        (
+            "http://mesh.test" + path,
+            {
+                "to": "2" * 32,
+                "content": "Hello over LXMF",
+                "method": "direct",
+                "replyToHash": "a1b2",
+            },
+        )
+    ]
+
+
+@pytest.mark.asyncio
+async def test_reticulum_message_send_rejects_invalid_destination_and_method() -> None:
+    session = FakeSession({})
+    client = MeshMonitorClient("http://mesh.test", "secret", session=session)  # type: ignore[arg-type]
+
+    with pytest.raises(ValueError, match="32 hexadecimal"):
+        await client.send_reticulum_message(
+            "synthetic-source", "hello", to_destination_hash="not-a-hash"
+        )
+    with pytest.raises(ValueError, match="delivery method"):
+        await client.send_reticulum_message(
+            "synthetic-source",
+            "hello",
+            to_destination_hash="2" * 32,
+            method="unsupported",
+        )
+
+    assert session.posts == []
+
+
+@pytest.mark.asyncio
 async def test_reticulum_snapshot_keeps_status_when_optional_route_fails() -> None:
     routes = _routes()
     routes["/api/sources/synthetic-source/reticulum/destinations"] = (
