@@ -631,7 +631,7 @@ async def test_meshtastic_ignore_is_server_only_and_source_scoped() -> None:
 
 @pytest.mark.asyncio
 async def test_meshtastic_node_delete_is_decimal_source_scoped_and_typed() -> None:
-    path = "/api/nodes/305441741?sourceId=source-1"
+    path = "/api/messages/nodes/305441741?sourceId=source-1"
     session = FakeSession(
         {
             path: (
