@@ -5,6 +5,8 @@ Versioning while remaining pre-1.0.
 
 ## Unreleased
 
+- Expose MeshMonitor's persisted `hideFromMap` node preference as a typed,
+  read-only property while retaining unknown response fields.
 - Add a typed, bounded source-scoped LXMF direct-message method for
   MeshMonitor 4.15.1's supported Reticulum message endpoint, including
   delivery method and reply-hash validation with no automatic retries.
