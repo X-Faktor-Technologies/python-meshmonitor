@@ -94,6 +94,21 @@ def test_live_node_shape_uses_top_level_metrics_and_position() -> None:
     assert node.hops_away == 3
 
 
+@pytest.mark.parametrize("field", ["hideFromMap", "hide_from_map"])
+def test_node_exposes_map_visibility_without_losing_unknown_fields(field: str) -> None:
+    node = Node.from_dict(
+        {"nodeId": "!1234", field: True, "futureField": {"retained": True}}
+    )
+
+    assert node.hidden_from_map is True
+    assert node.raw["futureField"] == {"retained": True}
+
+
+def test_node_map_visibility_rejects_non_boolean_values() -> None:
+    assert Node.from_dict({"nodeId": "!1234"}).hidden_from_map is None
+    assert Node.from_dict({"nodeId": "!1234", "hideFromMap": 1}).hidden_from_map is None
+
+
 def test_meshcore_contact_requires_public_key() -> None:
     with pytest.raises(ValueError, match="public key"):
         Node.from_meshcore_dict({"name": "broken"})
