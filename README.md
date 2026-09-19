@@ -1,6 +1,6 @@
 # MeshMonitor API Client
 
-An asynchronous, typed Python client for MeshMonitor 4.14.x–4.15.x and Home
+An asynchronous, typed Python client for MeshMonitor 4.14.x–4.16.x and Home
 Assistant.
 
 Version 0.8.0 is a pre-1.0 source release candidate. No package has been
@@ -96,7 +96,7 @@ tokens or raw production responses.
 ## Compatibility
 
 - Python 3.12, 3.13, and 3.14
-- MeshMonitor 4.14.x and 4.15.x live-tested
+- MeshMonitor 4.14.x through 4.16.1 live-tested
 - Semantic versioning; pre-1.0 minor releases may extend typed models
 
 See [API compatibility](docs/api-compatibility.md), the

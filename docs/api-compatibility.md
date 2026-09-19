@@ -2,7 +2,7 @@
 
 ## Verified baseline
 
-- MeshMonitor 4.14.x and 4.15.1
+- MeshMonitor 4.14.x through 4.16.1
 - Canonical source-scoped routes under `/api/v1/sources/{sourceId}`
 - Bearer-token authentication
 - Meshtastic and MeshCore node/contact modeling plus read-only Reticulum data
@@ -28,6 +28,10 @@
 10. Global automation definitions and per-definition runs require
     `automations:read`; run requests are limited to 1–200 records and typed
     models do not project serialized config, trigger, state, or log content.
+11. MeshMonitor 4.16.1 preserves the source, status, node, and source-scoped
+    message envelopes consumed by this client. The deterministic
+    `meshmonitor_4_16_1_contract.json` fixture records those shapes and the
+    upstream forward-only `lastHeard` invariant without production data.
 
 ## Known upstream behavior
 
@@ -45,3 +49,9 @@
   denial is never converted into an empty trail.
 - Automation definitions are global rather than source-scoped, and their run
   history is returned newest-first with a server-enforced maximum of 200.
+- MeshMonitor 4.16.1 updates MeshCore `lastHeard` on every receive path and
+  prevents an older contact timestamp from moving it backward. Consumers can
+  use the server value directly; they must not synthesize a newer timestamp.
+- MeshMonitor 4.16.1's cross-source permission repair applies to legacy/global
+  message reads. Bearer-token consumers should continue using the typed,
+  source-scoped Meshtastic and MeshCore methods modeled here.
