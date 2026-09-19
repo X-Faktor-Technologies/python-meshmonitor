@@ -6,7 +6,7 @@ from typing import Any
 
 import pytest
 
-from meshmonitor_client import MeshMonitorClient
+from meshmonitor_client import MeshMonitorClient, MeshMonitorResponseError
 
 from .conftest import FakeSession
 
@@ -132,6 +132,20 @@ async def test_reticulum_message_send_is_source_scoped_bounded_and_typed() -> No
             },
         )
     ]
+
+
+@pytest.mark.asyncio
+async def test_reticulum_message_send_rejects_unsuccessful_response() -> None:
+    path = "/api/sources/synthetic-source/reticulum/messages"
+    session = FakeSession({path: (200, {"success": False, "error": "not accepted"})})
+    client = MeshMonitorClient("http://mesh.test", "secret", session=session)  # type: ignore[arg-type]
+
+    with pytest.raises(MeshMonitorResponseError, match="did not accept"):
+        await client.send_reticulum_message(
+            "synthetic-source",
+            "Hello over LXMF",
+            to_destination_hash="2" * 32,
+        )
 
 
 @pytest.mark.asyncio
