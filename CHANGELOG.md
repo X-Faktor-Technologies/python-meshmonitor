@@ -8,6 +8,8 @@ Versioning while remaining pre-1.0.
 - Declare MeshMonitor 4.16.1 compatibility and add a deterministic synthetic
   contract fixture for source discovery, status, nodes, source-scoped messages,
   and the upstream forward-only `lastHeard` invariant.
+- Synchronize the standalone Reticulum send-result guard with the reviewed
+  vendored client so an explicit server rejection cannot be presented as sent.
 - Expose MeshMonitor's persisted `hideFromMap` node preference as a typed,
   read-only property while retaining unknown response fields.
 - Add a typed, bounded source-scoped LXMF direct-message method for
